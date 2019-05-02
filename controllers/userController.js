@@ -21,7 +21,7 @@ module.exports = {
     },
     postedList: (req, res) => {
         db.User.findById({ _id: req.params.id })
-            .populate("item")
+            .populate("givenItems")
             .then(dbuser => res.json(dbuser))
             .catch(err => res.status(422).json(err));
     }
