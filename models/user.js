@@ -9,12 +9,6 @@ const userSchema = new Schema({
       ref: "Item"
     }
   ],
-  foundItems: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Item"
-    }
-  ]
 });
 
 const User = mongoose.model("User", userSchema);
