@@ -5,7 +5,9 @@ const MAX_DISTANCE = 5; //In miles
 
 //Calculates the distance between the location and each item location in the array and returns a filtered list of items within a radius of the MAX_DISTANCE.
 function filterItems(location, itemsInput) {
-  return itemsInput.filter(item => haversine(location, item) <= MAX_DISTANCE);
+  return itemsInput.filter(
+    item => haversine(location, item.location) <= MAX_DISTANCE
+  );
 }
 
 module.exports = {
