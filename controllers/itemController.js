@@ -28,7 +28,7 @@ module.exports = {
   },
 
   update: (req, res) => {
-    db.Item.findOneAndUpdate({ _id: req.params.id }.req.body)
+    db.Item.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbItem => res.json(dbItem))
       .catch(err => res.status(422).json(err));
   }
