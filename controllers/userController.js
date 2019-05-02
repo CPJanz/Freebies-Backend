@@ -15,12 +15,12 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     signIn: (req, res) => {
-        db.User.findById({ id: req.params.id })
+        db.User.findById({ _id: req.params.id })
             .then(dbuser => res.json(dbuser))
             .catch(err => res.status(422).json(err));
     },
     postedList: (req, res) => {
-        db.User.findById({ id: req.params.id })
+        db.User.findById({ _id: req.params.id })
             .populate("item")
             .then(dbuser => res.json(dbuser))
             .catch(err => res.status(422).json(err));
