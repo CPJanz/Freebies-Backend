@@ -12,8 +12,14 @@ const itemSchema = new Schema({
     longitude: { type: Number, required: true }
   },
   description: { type: [String] },
-  timeStamp: { type: Number },
-  available: { type: Boolean },
+  timeStamp: {
+    type: Date,
+    default: Date.now
+  },
+  available: {
+    type: Boolean,
+    default: true
+  },
   history: [{ type: String }]
 });
 
