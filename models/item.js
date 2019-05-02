@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const itemSchema = new Schema({
   images: { type: [String], required: true },
-  posterId: {
+  giverId: {
     type: Schema.Types.ObjectId,
     ref: "User"
   },
@@ -14,7 +14,7 @@ const itemSchema = new Schema({
   description: { type: [String] },
   timeStamp: { type: Number },
   available: { type: Boolean },
-  history: { type: [String] }
+  history: [{ type: String }]
 });
 
 const Item = mongoose.model("Item", itemSchema);
