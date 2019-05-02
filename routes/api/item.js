@@ -9,6 +9,6 @@ router.route("/")
 
 router.route("/:id")
     // insert itemController function that will update an item in the database at that item id
-    .update(itemController.update)
+    .put(itemController.update)
 
 module.exports = router;
