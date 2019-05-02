@@ -3,7 +3,13 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   email: { type: String, required: true },
-  postedItems: [
+  givenItems: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item"
+    }
+  ],
+  foundItems: [
     {
       type: Schema.Types.ObjectId,
       ref: "Item"
