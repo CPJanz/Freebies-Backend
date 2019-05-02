@@ -7,7 +7,7 @@ router.route("/")
     .post(userController.newUser);
 
 // route to get the necessary information from the user collection by passing the user id; this will be for sign in
-router.route(":id")
+router.route("/:id")
     .get(userController.signIn);
 
 // route to user that will populate with their posted items based on user id
