@@ -20,15 +20,31 @@ module.exports = {
 
   create: (req, res) => {
     db.Item.create(req.body)
-      .then(dbNew => {
-        return db.User.findOneAndUpdate({ _id: req.params.id }, { $push: { givenItems: dbNew._id }}, { new: true })
+      .then(dbItem => {
+        return db.User.findOneAndUpdate(
+          { _id: req.params.id },
+          { $push: { givenItems: dbItem._id } },
+          { new: true }
+        );
       })
+      .then(dbUser => res.json(dbUser))
+      .catch(err => res.status(422).json(err));
+  },
+
+  repost: (req, res) => {
+    db.Item.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { timeStamp: new Date() }, $set: { available: true } }
+    )
       .then(dbItem => res.json(dbItem))
       .catch(err => res.status(422).json(err));
   },
 
-  update: (req, res) => {
-    db.Item.findOneAndUpdate({ _id: req.params.id }, req.body)
+  taken: (req, res) => {
+    db.Item.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: { available: false } }
+    )
       .then(dbItem => res.json(dbItem))
       .catch(err => res.status(422).json(err));
   }
