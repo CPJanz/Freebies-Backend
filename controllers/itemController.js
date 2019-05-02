@@ -12,6 +12,7 @@ function filterItems(location, itemsInput) {
 
 module.exports = {
   findNearby: (req, res) => {
+    console.log(req.body);
     db.Item.find({})
       .then(dbItems => res.json(filterItems(req.body, dbItems)))
       .catch(err => res.status(422).json(err));
@@ -19,12 +20,14 @@ module.exports = {
 
   create: (req, res) => {
     db.Item.create(req.body)
+      .then(dbNew => {
+        return db.User.findOneAndUpdate({ _id: req.params.id }, { $push: { givenItems: dbNew._id }}, { new: true })
+      })
       .then(dbItem => res.json(dbItem))
       .catch(err => res.status(422).json(err));
   },
 
   update: (req, res) => {
-    console.log(req.body);
     db.Item.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbItem => res.json(dbItem))
       .catch(err => res.status(422).json(err));
