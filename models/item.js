@@ -5,15 +5,16 @@ const itemSchema = new Schema({
   images: { type: [String], required: true },
   giverId: {
     type: Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
+    required: true
   },
   location: {
     latitude: { type: Number, required: true },
     longitude: { type: Number, required: true }
   },
-  description: { type: [String] },
+  description: { type: String },
   timeStamp: {
-    type: Date,
+    type: [Date],
     default: Date.now
   },
   available: {
