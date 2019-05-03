@@ -13,7 +13,7 @@ function filterItems(location, itemsInput) {
 
 module.exports = {
   findNearby: (req, res) => {
-    db.Item.find({})
+    db.Item.find({ available: true })
       .then(resultArr => {
         res.json(
           resultArr
