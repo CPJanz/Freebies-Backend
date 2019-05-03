@@ -1,7 +1,7 @@
 // Used to calculate distance between two points
 const haversine = require("haversine-js");
 const db = require("../models");
-const MAX_DISTANCE = 5; //In miles
+const MAX_DISTANCE = 50; //In miles
 const POST_DURATION = 24 * 60 * 60 * 100; //In miliseconds
 
 //Calculates the distance between the location and each item location in the array and returns a filtered list of items within a radius of the MAX_DISTANCE.
