@@ -12,9 +12,8 @@ function filterItems(location, itemsInput) {
 
 module.exports = {
   findNearby: (req, res) => {
-    console.log(req.body);
     db.Item.find({})
-      .then(dbItems => res.json(filterItems(req.body, dbItems)))
+      .then(dbItems => res.json(filterItems(req.query, dbItems)))
       .catch(err => res.status(422).json(err));
   },
 
