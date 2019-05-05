@@ -8,6 +8,4 @@ router
 
 router.route("/:email").get(userController.signIn);
 
-router.route("/posts/:id").get(userController.postedList);
-
 module.exports = router;

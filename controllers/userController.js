@@ -28,11 +28,5 @@ module.exports = {
     db.User.find({ email: req.params.email })
       .then(dbuser => res.json(dbuser))
       .catch(err => res.status(422).json(err));
-  },
-  postedList: (req, res) => {
-    db.User.findById({ _id: req.params.id })
-      .populate("givenItems")
-      .then(dbuser => res.json(dbuser))
-      .catch(err => res.status(422).json(err));
   }
 };
