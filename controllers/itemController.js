@@ -78,7 +78,8 @@ module.exports = {
   updateAvailable: (req, res) => {
     db.Item.findOneAndUpdate(
       { _id: req.params.id },
-      { $set: { available: req.body.available } }
+      { $set: { available: req.body.available } },
+      {new: true} // return altered item
     )
       .then(dbItem => res.json(dbItem))
       .catch(err => res.status(422).json(err));
