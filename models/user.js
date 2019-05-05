@@ -8,7 +8,7 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Item"
     }
-  ],
+  ]
 });
 
 const User = mongoose.model("User", userSchema);
