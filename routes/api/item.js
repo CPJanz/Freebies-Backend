@@ -6,7 +6,7 @@ router.route("/").get(itemController.findNearby);
 router
   .route("/:id")
   .post(itemController.create)
-  .put(itemController.taken)
+  .put(itemController.updateAvailable)
   .get(itemController.findGiven);
 
 router.route("/repost/:id").put(itemController.repost);
