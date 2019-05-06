@@ -2,13 +2,10 @@
 const haversine = require("haversine-js");
 const db = require("../models");
 const MAX_DISTANCE = 50; //In miles
-const POST_DURATION = 24 * 60 * 60 * 100; //In miliseconds
+const POST_DURATION = 24 * 60 * 60 * 1000; //In miliseconds
 
-//Calculates the distance between the location and each item location in the array and returns a filtered list of items within a radius of the MAX_DISTANCE.
-function filterItems(location, itemsInput) {
-  return itemsInput.filter(
-    item => haversine(location, item.location) <= MAX_DISTANCE
-  );
+function isInTimeWindow(timeStamp) {
+  return POST_DURATION - (new Date() - timeStamp) > 0;
 }
 
 module.exports = {
@@ -17,6 +14,11 @@ module.exports = {
       .then(resultArr => {
         res.json(
           resultArr
+            .filter(element => {
+              return isInTimeWindow(
+                element.timeStamp[element.timeStamp.length - 1]
+              );
+            })
             .filter(item => haversine(req.query, item.location) <= MAX_DISTANCE)
             .sort(
               (a, b) =>
@@ -39,8 +41,7 @@ module.exports = {
         )
         .forEach(element => {
           if (
-            POST_DURATION -
-              (new Date() - element.timeStamp[element.timeStamp.length - 1]) >
+            isInTimeWindow(element.timeStamp[element.timeStamp.length - 1]) >
               0 &&
             element.available
           ) {
@@ -79,7 +80,7 @@ module.exports = {
     db.Item.findOneAndUpdate(
       { _id: req.params.id },
       { $set: { available: req.body.available } },
-      {new: true} // return altered item
+      { new: true } // return altered item
     )
       .then(dbItem => res.json(dbItem))
       .catch(err => res.status(422).json(err));
