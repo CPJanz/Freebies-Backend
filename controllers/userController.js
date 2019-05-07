@@ -1,14 +1,6 @@
 const db = require("../models");
 
 module.exports = {
-  allUsers: (req, res) => {
-    db.User.find()
-      .then(dbusers => {
-        console.log("hit");
-        res.json(dbusers);
-      })
-      .catch(err => res.status(422).json(err));
-  },
   //Takes in an e-mail, checks for an existing account on that e-mail, if none exists create the account and return that, otherwise return false.
   newUser: (req, res) => {
     db.User.find({ email: req.body.email })
