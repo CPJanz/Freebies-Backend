@@ -45,6 +45,9 @@ module.exports = {
               0 &&
             element.available
           ) {
+            element._doc.timeLeft =
+              POST_DURATION -
+              (new Date() - element.timeStamp[element.timeStamp.length - 1]);
             returnObject.active.push(element);
           } else {
             returnObject.inactive.push(element);
