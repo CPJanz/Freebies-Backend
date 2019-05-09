@@ -18,6 +18,10 @@ function sortByTimeStamp(inputArr) {
 
 function finalSorting(inputArr) {
   const result = [];
+  if (inputArr.length === 0) {
+    // Early return if inputArr is empty.
+    return null;
+  }
   // Store first element in a sub array (The start of the first batch)
   let batch = [inputArr[0]];
   // Loop through the array a looking at each element
