@@ -3,7 +3,7 @@ const haversine = require("haversine-js");
 const db = require("../models");
 const CLOSE = 100 / 5280; //In feet
 const MAX_DISTANCE = 50; //In miles
-const POST_DURATION = 24 * 60 * 60 * 1000; //In miliseconds
+const POST_DURATION = (1 / 1440) * 24 * 60 * 60 * 1000; //In miliseconds
 
 function isInTimeWindow(timeStamp) {
   return POST_DURATION - (new Date() - timeStamp) > 0;
