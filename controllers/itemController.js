@@ -3,7 +3,7 @@ const haversine = require("haversine-js");
 const db = require("../models");
 const CLOSE = 100 / 5280; //In feet
 const MAX_DISTANCE = 50; //In miles
-const POST_DURATION = (1 / 24) * 24 * 60 * 60 * 1000; //In miliseconds
+const POST_DURATION = (1 / (24 * 60)) * 24 * 60 * 60 * 1000; //In miliseconds
 
 function isInTimeWindow(timeStamp) {
   return POST_DURATION - (new Date() - timeStamp) > 0;
@@ -16,8 +16,10 @@ function sortByTimeStamp(inputArr) {
   );
 }
 
+//Takes in an array of items which have been sorted by distance from the user. Outputs an array with items posted CLOSE together grouped and each group sorted by distance (still an array of items).
 function finalSorting(inputArr) {
   const result = [];
+  //Check to see if inputArr is empty
   if (inputArr.length === 0) {
     // Early return if inputArr is empty.
     return null;
