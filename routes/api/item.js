@@ -7,7 +7,8 @@ router
   .route("/:id")
   .post(itemController.create)
   .put(itemController.updateAvailable)
-  .get(itemController.findGiven);
+  .get(itemController.findGiven)
+  .delete(itemController.removeItem);
 
 router.route("/repost/:id").put(itemController.repost);
 
