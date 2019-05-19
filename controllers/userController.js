@@ -20,5 +20,11 @@ module.exports = {
     db.User.find({ email: req.params.email })
       .then(dbuser => res.json(dbuser))
       .catch(err => res.status(422).json(err));
+  },
+  // Removes a user's account
+  removeAcct: (req, res) => {
+    db.User.remove({_id: req.params.id})
+      .then(dbuser => res.json(dbuser))
+      .catch(err => res.status(422).json(err));
   }
 };

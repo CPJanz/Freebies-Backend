@@ -105,6 +105,12 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  removeItem: (req, res) => {
+    db.Item.remove({ _id: req.params.id })
+      .then(dbItem => res.json(dbItem))
+      .catch(err => res.status(422).json(err));
+  },
+
   repost: (req, res) => {
     db.Item.findOneAndUpdate(
       { _id: req.params.id },
