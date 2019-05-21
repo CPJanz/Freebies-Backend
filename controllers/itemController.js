@@ -107,6 +107,12 @@ module.exports = {
 
   removeItem: (req, res) => {
     db.Item.remove({ _id: req.params.id })
+      .then(dbItem => {
+        return db.User.findOneAndUpdate(
+          { _id: req.body.userId },
+          { $pullAll: { givenItems: [req.params.id] } }
+        );
+      })
       .then(dbItem => res.json(dbItem))
       .catch(err => res.status(422).json(err));
   },
