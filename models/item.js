@@ -2,7 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const itemSchema = new Schema({
-  images: { type: [String], required: true },
+  images: [
+    {
+      preview: { type: String, required: true },
+      uri: { type: String, required: true }
+    }
+  ],
   giverId: {
     type: Schema.Types.ObjectId,
     ref: "User",
