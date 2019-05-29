@@ -23,8 +23,21 @@ module.exports = {
   },
   // Removes a user's account
   removeAcct: (req, res) => {
-    db.User.remove({_id: req.params.id})
-      .then(dbuser => res.json(dbuser))
+    // Delete user account
+    db.User.deleteMany({ _id: req.params.id })
+      .then(() => {
+        // Find all items with the giverId of the deleted account's id.
+        db.Item.find({ giverId: req.params.id }).then(dbItems => {
+          const idArray = [];
+          // Construct an array of ids of items to be deleted.
+          dbItems.forEach(item => idArray.push(item._id));
+          // Delete items listed in the array.
+          db.Item.deleteMany({ _id: { $in: idArray } });
+        });
+      })
+      .then(result => {
+        return res.json(result);
+      })
       .catch(err => res.status(422).json(err));
   }
 };
