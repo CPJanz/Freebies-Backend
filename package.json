@@ -23,6 +23,6 @@
     "express": "^4.17.1",
     "haversine-js": "^1.0.0",
     "mongojs": "^2.6.0",
-    "mongoose": "^5.5.13"
+    "mongoose": "^5.7.5"
   }
 }
